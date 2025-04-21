@@ -26,7 +26,8 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/{id}")
+
+    @GetMapping("/id/{id}")
     @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
         Optional<Employee> employee = employeeService.getEmployeeById(id);
@@ -36,6 +37,33 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
+    @GetMapping("/name/{name}")
+    @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
+    public List<Employee> getEmployeeByName(@PathVariable String name) {
+        return employeeService.getEmployeesByName(name);
+    }
+    @GetMapping("/position/{position}")
+    @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
+    public List<Employee> getEmployeesByPosition(@PathVariable String position){return employeeService.getEmployeesByPosition(position);}
+
+    @GetMapping("/salary/{salary}")
+    @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
+    public List<Employee> getEmployeesWithSalary(@PathVariable Double salary) {return employeeService.getEmployeesWithSalary(salary);}
+    
+    @GetMapping("/salarybetween/{salary1}/{salary2}")
+    @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
+    public List<Employee> getEmployeesWithSalaryBetween(@PathVariable Double salary1,@PathVariable Double salary2) {return employeeService.getEmployeesWithSalaryBetween(salary1,salary2);}
+
+    @GetMapping("/salarygreaterthan/{salary}")
+    @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
+    public List<Employee> getEmployeesWithSalaryGreaterThan(@PathVariable Double salary) {return employeeService.getEmployeesWithSalaryGreaterThan(salary);}
+
+    @GetMapping("/salarylessthan/{salary}")
+    @PreAuthorize("hasAuthority('SCOPE_readpersonnel')")
+    public List<Employee> getEmployeesWithSalaryLessThan(@PathVariable Double salary) {return employeeService.getEmployeesWithSalaryLessThan(salary);}
+
 
     @PostMapping
     @PreAuthorize("hasAuthority('SCOPE_addpersonnel')")
