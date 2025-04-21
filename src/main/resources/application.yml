@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: personnel
+
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/personnelDB
+    username: administrator
+    password: admin1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 10
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: https://dev-obofxoglcwavh3e1.us.auth0.com/
+          audiences: https://personnelapi
+
